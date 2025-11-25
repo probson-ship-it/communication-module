@@ -4,20 +4,22 @@
   <meta charset="UTF-8" />
   <title>Rollout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --brycer-blue: #03233d;
       --brycer-orange: #e17f49;
-      --brycer-dark: #020915;
-      --brycer-surface: #071522;
-      --brycer-surface-alt: #0c1f30;
-      --brycer-border: #153047;
-      --brycer-text-main: #f5f7fb;
-      --brycer-text-muted: #9fb2c7;
-      --brycer-pill: #0c2236;
-      --radius-lg: 18px;
-      --radius-xl: 26px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.35);
+      --bg-page: #f5f7fa;
+      --bg-card: #ffffff;
+      --border-soft: #dde3ec;
+      --text-main: #1f2933;
+      --text-muted: #6b7280;
+      --radius-lg: 16px;
+      --radius-xl: 22px;
+      --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
     }
 
     * {
@@ -31,12 +33,10 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
-      background:
-        radial-gradient(circle at top left, #153047 0, #020915 45%),
-        radial-gradient(circle at bottom right, #0c2236 0, #020915 55%);
-      color: var(--brycer-text-main);
+      background: var(--bg-page);
+      color: var(--text-main);
       min-height: 100vh;
       padding: 32px 16px 48px;
       display: flex;
@@ -51,13 +51,8 @@
     .shell {
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.03),
-          rgba(255, 255, 255, 0)
-        ),
-        radial-gradient(circle at top center, #0f2940 0, #020915 60%);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
       padding: 24px 24px 32px;
     }
 
@@ -67,31 +62,11 @@
       gap: 20px;
       border-radius: var(--radius-lg);
       padding: 20px 20px 22px;
-      background: linear-gradient(
-        135deg,
-        rgba(225, 127, 73, 0.14),
-        rgba(3, 35, 61, 0.8)
-      );
-      border: 1px solid rgba(225, 127, 73, 0.4);
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 110% -10%, rgba(225, 127, 73, 0.35), transparent 55%),
-        radial-gradient(circle at -10% 120%, rgba(3, 152, 252, 0.35), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
-      mix-blend-mode: screen;
+      background: #f9fafb;
+      border: 1px solid var(--border-soft);
     }
 
     .hero-inner {
-      position: relative;
-      z-index: 1;
       display: grid;
       grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
       gap: 24px;
@@ -104,18 +79,18 @@
       gap: 10px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(2, 9, 21, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 11px;
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--brycer-text-muted);
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
     }
 
     .hero-kicker span.tag {
       padding: 2px 9px;
       border-radius: 999px;
-      background: rgba(225, 127, 73, 0.14);
+      background: rgba(225, 127, 73, 0.06);
       color: var(--brycer-orange);
       font-weight: 600;
     }
@@ -124,13 +99,14 @@
       font-size: clamp(26px, 3vw, 32px);
       line-height: 1.1;
       margin-top: 10px;
+      color: var(--brycer-blue);
     }
 
     .hero-sub {
       margin-top: 12px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
       font-size: 14px;
-      max-width: 460px;
+      max-width: 520px;
     }
 
     .hero-metrics {
@@ -143,22 +119,23 @@
     .metric-card {
       padding: 10px 14px;
       border-radius: 12px;
-      background: rgba(2, 9, 21, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      min-width: 130px;
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      min-width: 160px;
     }
 
     .metric-label {
-      font-size: 11px;
-      color: var(--brycer-text-muted);
+      font-size: 10px;
+      color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       margin-bottom: 4px;
     }
 
     .metric-value {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
+      color: var(--brycer-blue);
     }
 
     .metric-chip {
@@ -168,17 +145,18 @@
       gap: 6px;
       padding: 2px 8px;
       border-radius: 999px;
-      background: rgba(4, 104, 76, 0.2);
-      color: #7ce0b5;
+      background: #f3faf7;
+      color: #15803d;
       font-size: 11px;
+      border: 1px solid #bbf7d0;
     }
 
     .hero-panel {
       justify-self: stretch;
-      border-radius: 16px;
-      background: rgba(2, 9, 21, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 16px 16px 14px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      padding: 14px 14px 12px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -189,29 +167,25 @@
       justify-content: space-between;
       align-items: center;
       font-size: 12px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
     }
 
     .hero-panel-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #e5f0ff;
+      color: var(--brycer-blue);
     }
 
     .hero-led {
-      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
-        "Courier New", monospace;
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--text-muted);
       padding: 8px 10px;
       border-radius: 10px;
-      background: rgba(4, 15, 26, 0.9);
-      border: 1px solid rgba(21, 48, 71, 0.9);
-      font-size: 11px;
-      line-height: 1.5;
-      color: var(--brycer-text-muted);
-      overflow-x: auto;
-      white-space: nowrap;
+      background: #f9fafb;
+      border: 1px dashed var(--border-soft);
     }
 
     .hero-grid {
@@ -223,23 +197,24 @@
 
     .hero-pill {
       border-radius: 10px;
-      background: var(--brycer-pill);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: #f9fafb;
+      border: 1px solid var(--border-soft);
       padding: 8px 10px;
       font-size: 11px;
     }
 
     .hero-pill-label {
       font-size: 10px;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
       margin-bottom: 2px;
     }
 
     .hero-pill-value {
-      font-weight: 600;
+      font-weight: 500;
       font-size: 11px;
+      color: var(--text-main);
     }
 
     main {
@@ -251,8 +226,8 @@
 
     section {
       border-radius: var(--radius-lg);
-      background: var(--brycer-surface);
-      border: 1px solid var(--brycer-border);
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
       padding: 16px 16px 18px;
     }
 
@@ -261,10 +236,10 @@
     }
 
     .section-label {
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
       margin-bottom: 4px;
     }
 
@@ -273,26 +248,27 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .section-title {
       font-size: 16px;
       font-weight: 600;
+      color: var(--brycer-blue);
     }
 
     .section-tag {
       font-size: 11px;
       padding: 2px 8px;
       border-radius: 999px;
-      background: rgba(2, 9, 21, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--brycer-text-muted);
+      background: #f9fafb;
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
     }
 
     .section-body {
       font-size: 13px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
       line-height: 1.5;
     }
 
@@ -304,31 +280,30 @@
     }
 
     .day-card {
-      border-radius: 14px;
-      background: var(--brycer-surface-alt);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      background: #f9fafb;
+      border: 1px solid var(--border-soft);
       padding: 10px 11px 11px;
-      position: relative;
-      overflow: hidden;
     }
 
     .day-label {
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
       margin-bottom: 2px;
     }
 
     .day-title {
       font-size: 13px;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      color: var(--brycer-blue);
     }
 
     .day-meta {
       font-size: 11px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
       margin-bottom: 6px;
     }
 
@@ -341,17 +316,17 @@
 
     .pill {
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-soft);
       padding: 2px 8px;
       font-size: 11px;
-      color: var(--brycer-text-muted);
-      background: rgba(2, 9, 21, 0.9);
+      color: var(--text-muted);
+      background: #ffffff;
     }
 
     .day-list {
       list-style: none;
       font-size: 12px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
     }
 
     .day-list li {
@@ -377,8 +352,8 @@
 
     .aud-card {
       border-radius: 12px;
-      background: var(--brycer-surface-alt);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: #f9fafb;
+      border: 1px solid var(--border-soft);
       padding: 9px 10px 10px;
       font-size: 12px;
     }
@@ -387,12 +362,12 @@
       font-size: 11px;
       font-weight: 600;
       margin-bottom: 4px;
-      color: #e5f0ff;
+      color: var(--brycer-blue);
     }
 
     .aud-note {
       font-size: 11px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
     }
 
     .assets-list {
@@ -408,9 +383,9 @@
       gap: 10px;
       align-items: center;
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-soft);
       padding: 7px 9px;
-      background: rgba(2, 9, 21, 0.95);
+      background: #f9fafb;
     }
 
     .asset-main {
@@ -422,11 +397,12 @@
     .asset-name {
       font-weight: 500;
       font-size: 12px;
+      color: var(--brycer-blue);
     }
 
     .asset-desc {
       font-size: 11px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
     }
 
     .asset-tag {
@@ -435,22 +411,22 @@
       border-radius: 999px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      background: rgba(225, 127, 73, 0.15);
+      background: rgba(225, 127, 73, 0.06);
       color: var(--brycer-orange);
-      border: 1px solid rgba(225, 127, 73, 0.5);
+      border: 1px solid rgba(225, 127, 73, 0.4);
       white-space: nowrap;
     }
 
     footer {
       margin-top: 20px;
       font-size: 11px;
-      color: var(--brycer-text-muted);
+      color: var(--text-muted);
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 10px;
       padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid var(--border-soft);
     }
 
     footer span.strong {
@@ -516,7 +492,7 @@
 
           <aside class="hero-panel">
             <div class="hero-panel-header">
-              <div class="hero-panel-title">Week-One Schedule</div>
+              <div class="hero-panel-title">Week-one schedule</div>
               <div>Internal + external</div>
             </div>
             <div class="hero-led">
@@ -548,7 +524,7 @@
           <section id="timeline">
             <div class="section-label">Sequence</div>
             <div class="section-title-row">
-              <div class="section-title">Launch Timeline – Week One</div>
+              <div class="section-title">Launch timeline – week one</div>
               <div class="section-tag">Simple, paced, easy to follow</div>
             </div>
             <div class="section-body">
@@ -561,7 +537,7 @@
               <div class="timeline-grid">
                 <div class="day-card">
                   <div class="day-label">Monday · Dec 8</div>
-                  <div class="day-title">Internal Team Training</div>
+                  <div class="day-title">Internal team training</div>
                   <div class="day-meta">Sales · CSM · Customer Experience · Data · Product</div>
                   <div class="pill-row">
                     <span class="pill">How messaging works</span>
@@ -578,7 +554,7 @@
 
                 <div class="day-card">
                   <div class="day-label">Tuesday</div>
-                  <div class="day-title">AHJ Teaser Email</div>
+                  <div class="day-title">AHJ teaser email</div>
                   <div class="day-meta">External – AHJ segment</div>
                   <div class="pill-row">
                     <span class="pill">Short and energetic</span>
@@ -595,7 +571,7 @@
 
                 <div class="day-card">
                   <div class="day-label">Thursday</div>
-                  <div class="day-title">AHJ Launch Email</div>
+                  <div class="day-title">AHJ launch email</div>
                   <div class="day-meta">External – AHJ segment</div>
                   <div class="pill-row">
                     <span class="pill">How it works in TCE</span>
@@ -615,7 +591,7 @@
 
                 <div class="day-card">
                   <div class="day-label">Thursday</div>
-                  <div class="day-title">Service Provider Launch Email</div>
+                  <div class="day-title">Service provider launch email</div>
                   <div class="day-meta">External – SP segment</div>
                   <div class="pill-row">
                     <span class="pill">Where to go</span>
@@ -634,8 +610,8 @@
 
                 <div class="day-card">
                   <div class="day-label">Thursday</div>
-                  <div class="day-title">Social Post</div>
-                  <div class="day-meta">External – Public</div>
+                  <div class="day-title">Social post</div>
+                  <div class="day-meta">External – public</div>
                   <div class="pill-row">
                     <span class="pill">High-level</span>
                     <span class="pill">Safety-focused</span>
@@ -650,7 +626,7 @@
 
                 <div class="day-card">
                   <div class="day-label">Friday</div>
-                  <div class="day-title">Internal Follow-Up & Questions</div>
+                  <div class="day-title">Internal follow-up & questions</div>
                   <div class="day-meta">Internal – all teams</div>
                   <div class="pill-row">
                     <span class="pill">Normalize questions</span>
@@ -672,7 +648,7 @@
           <section id="audiences">
             <div class="section-label">Team training</div>
             <div class="section-title-row">
-              <div class="section-title">Monday · December 8 – Internal Session</div>
+              <div class="section-title">Monday · December 8 – internal session</div>
               <div class="section-tag">Shared understanding first</div>
             </div>
             <div class="section-body">
@@ -722,7 +698,7 @@
           <section id="assets">
             <div class="section-label">Campaigns</div>
             <div class="section-title-row">
-              <div class="section-title">Email & Messaging Map</div>
+              <div class="section-title">Email & messaging map</div>
               <div class="section-tag">Who gets what · and when</div>
             </div>
             <div class="section-body">
@@ -735,18 +711,18 @@
               <div class="assets-list">
                 <div class="asset-row">
                   <div class="asset-main">
-                    <div class="asset-name">Internal Training Notice</div>
+                    <div class="asset-name">Internal training notice</div>
                     <div class="asset-desc">
                       Sent ahead of the Monday session so teams know what’s coming, when
                       to join, and what the training will (and won’t) cover.
                     </div>
                   </div>
-                  <span class="asset-tag">Mon – Internal</span>
+                  <span class="asset-tag">Mon – internal</span>
                 </div>
 
                 <div class="asset-row">
                   <div class="asset-main">
-                    <div class="asset-name">AHJ Teaser Email</div>
+                    <div class="asset-name">AHJ teaser email</div>
                     <div class="asset-desc">
                       Short note that direct messaging is coming to TCE. Modern, confident tone
                       focused on clearer, faster conversations with service providers.
@@ -757,7 +733,7 @@
 
                 <div class="asset-row">
                   <div class="asset-main">
-                    <div class="asset-name">AHJ Launch Email</div>
+                    <div class="asset-name">AHJ launch email</div>
                     <div class="asset-desc">
                       Explains where messaging lives in TCE, how it can be used to quickly
                       clarify work with service providers, and how to turn on email alerts
@@ -769,7 +745,7 @@
 
                 <div class="asset-row">
                   <div class="asset-main">
-                    <div class="asset-name">Service Provider Launch Email</div>
+                    <div class="asset-name">Service provider launch email</div>
                     <div class="asset-desc">
                       Shows service providers where in TCE to go when they have questions,
                       and lets them know they can subscribe to email notifications so they
@@ -781,31 +757,31 @@
 
                 <div class="asset-row">
                   <div class="asset-main">
-                    <div class="asset-name">Social Post</div>
+                    <div class="asset-name">Social post</div>
                     <div class="asset-desc">
                       Public announcement that BRYCER has added in-platform messaging between
                       AHJs and service providers in The Compliance Engine, focused on safety,
                       clarity, and modern communication.
                     </div>
                   </div>
-                  <span class="asset-tag">Thu – Public</span>
+                  <span class="asset-tag">Thu – public</span>
                 </div>
 
                 <div class="asset-row">
                   <div class="asset-main">
-                    <div class="asset-name">Internal Follow-Up Note</div>
+                    <div class="asset-name">Internal follow-up note</div>
                     <div class="asset-desc">
                       Recap for internal teams on what questions came in, how we’re answering
                       them, and a reminder to keep directing customers back into TCE as the
                       home for these conversations.
                     </div>
                   </div>
-                  <span class="asset-tag">Fri – Internal</span>
+                  <span class="asset-tag">Fri – internal</span>
                 </div>
 
                 <div class="asset-row">
                   <div class="asset-main">
-                    <div class="asset-name">End-of-Quarter Newsletter Feature</div>
+                    <div class="asset-name">End-of-quarter newsletter feature</div>
                     <div class="asset-desc">
                       Later in the quarter, we highlight how the communication module has
                       helped AHJs and service providers resolve issues faster and keep
