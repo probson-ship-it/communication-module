@@ -1,172 +1,965 @@
-<div style="font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background:#f5f7fa; padding:32px 16px;">
-  <div style="max-width:900px; margin:0 auto; background:#ffffff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.06); padding:32px 28px; border-top:6px solid #e17f49;">
-    
-    <!-- Tagline -->
-    <div style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#6b7280; margin-bottom:8px;">
-      Backed by BRYCER • Turning Reports into Results
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TCE Conversations – Feature Rollout Plan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --brycer-blue: #03233d;
+      --brycer-orange: #e17f49;
+      --brycer-dark: #020915;
+      --brycer-surface: #071522;
+      --brycer-surface-alt: #0c1f30;
+      --brycer-border: #153047;
+      --brycer-text-main: #f5f7fb;
+      --brycer-text-muted: #9fb2c7;
+      --brycer-pill: #0c2236;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background:
+        radial-gradient(circle at top left, #153047 0, #020915 45%),
+        radial-gradient(circle at bottom right, #0c2236 0, #020915 55%);
+      color: var(--brycer-text-main);
+      min-height: 100vh;
+      padding: 32px 16px 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1120px;
+    }
+
+    .shell {
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0)
+        ),
+        radial-gradient(circle at top center, #0f2940 0, #020915 60%);
+      padding: 24px 24px 32px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 22px;
+      background: linear-gradient(
+        135deg,
+        rgba(225, 127, 73, 0.14),
+        rgba(3, 35, 61, 0.8)
+      );
+      border: 1px solid rgba(225, 127, 73, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 110% -10%, rgba(225, 127, 73, 0.35), transparent 55%),
+        radial-gradient(circle at -10% 120%, rgba(3, 152, 252, 0.35), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(2, 9, 21, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--brycer-text-muted);
+    }
+
+    .hero-kicker span.tag {
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(225, 127, 73, 0.14);
+      color: var(--brycer-orange);
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(26px, 3vw, 32px);
+      line-height: 1.1;
+      margin-top: 10px;
+    }
+
+    .hero-sub {
+      margin-top: 12px;
+      color: var(--brycer-text-muted);
+      font-size: 14px;
+      max-width: 460px;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .metric-card {
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(2, 9, 21, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      min-width: 130px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .metric-chip {
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(4, 104, 76, 0.2);
+      color: #7ce0b5;
+      font-size: 11px;
+    }
+
+    .hero-panel {
+      justify-self: stretch;
+      border-radius: 16px;
+      background: rgba(2, 9, 21, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--brycer-text-muted);
+    }
+
+    .hero-panel-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e5f0ff;
+    }
+
+    .hero-led {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(4, 15, 26, 0.9);
+      border: 1px solid rgba(21, 48, 71, 0.9);
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--brycer-text-muted);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .hero-pill {
+      border-radius: 10px;
+      background: var(--brycer-pill);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 8px 10px;
+      font-size: 11px;
+    }
+
+    .hero-pill-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brycer-text-muted);
+      margin-bottom: 2px;
+    }
+
+    .hero-pill-value {
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    .nav-strip {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(2, 9, 21, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+      text-decoration: none;
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brycer-orange);
+      box-shadow: 0 0 10px rgba(225, 127, 73, 0.8);
+    }
+
+    main {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr);
+      gap: 20px;
+    }
+
+    section {
+      border-radius: var(--radius-lg);
+      background: var(--brycer-surface);
+      border: 1px solid var(--brycer-border);
+      padding: 16px 16px 18px;
+    }
+
+    section + section {
+      margin-top: 14px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brycer-text-muted);
+      margin-bottom: 4px;
+    }
+
+    .section-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(2, 9, 21, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--brycer-text-muted);
+    }
+
+    .section-body {
+      font-size: 13px;
+      color: var(--brycer-text-muted);
+      line-height: 1.5;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .day-card {
+      border-radius: 14px;
+      background: var(--brycer-surface-alt);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 10px 11px 11px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--brycer-text-muted);
+      margin-bottom: 2px;
+    }
+
+    .day-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .day-meta {
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 8px;
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+      background: rgba(2, 9, 21, 0.9);
+    }
+
+    .day-list {
+      list-style: none;
+      font-size: 12px;
+      color: var(--brycer-text-muted);
+    }
+
+    .day-list li {
+      padding-left: 12px;
+      position: relative;
+      margin-bottom: 2px;
+    }
+
+    .day-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--brycer-orange);
+      font-size: 12px;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .aud-card {
+      border-radius: 12px;
+      background: var(--brycer-surface-alt);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 9px 10px 10px;
+      font-size: 12px;
+    }
+
+    .aud-role {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #e5f0ff;
+    }
+
+    .aud-note {
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+    }
+
+    .assets-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    .asset-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 7px 9px;
+      background: rgba(2, 9, 21, 0.95);
+    }
+
+    .asset-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .asset-name {
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .asset-desc {
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+    }
+
+    .asset-tag {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(225, 127, 73, 0.15);
+      color: var(--brycer-orange);
+      border: 1px solid rgba(225, 127, 73, 0.5);
+      white-space: nowrap;
+    }
+
+    .risk-list {
+      list-style: none;
+      font-size: 12px;
+      color: var(--brycer-text-muted);
+      display: grid;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .risk-item {
+      display: flex;
+      gap: 6px;
+    }
+
+    .risk-label {
+      flex-shrink: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: rgba(103, 65, 136, 0.25);
+      color: #e0c9ff;
+    }
+
+    .risk-text span {
+      color: var(--brycer-text-main);
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .score-card {
+      border-radius: 12px;
+      background: var(--brycer-surface-alt);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 9px 10px 10px;
+    }
+
+    .score-label {
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+      margin-bottom: 2px;
+    }
+
+    .score-value {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .score-sub {
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+    }
+
+    .checklist {
+      list-style: none;
+      font-size: 12px;
+      display: grid;
+      gap: 6px;
+      margin-top: 6px;
+      color: var(--brycer-text-muted);
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    .check-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(124, 224, 181, 0.8);
+      background: rgba(7, 35, 31, 0.7);
+      box-shadow: 0 0 0 1px rgba(2, 9, 21, 0.8);
+      position: relative;
+      margin-top: 1px;
+    }
+
+    .check-icon::after {
+      content: "";
+      position: absolute;
+      inset: 3px 4px 3px 3px;
+      border-right: 2px solid #7ce0b5;
+      border-bottom: 2px solid #7ce0b5;
+      transform: rotate(40deg);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--brycer-text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    footer span.strong {
+      color: var(--brycer-orange);
+      font-weight: 600;
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 20px 10px 28px;
+      }
+      .shell {
+        padding: 18px 16px 26px;
+      }
+      .timeline-grid,
+      .audience-grid,
+      .score-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        padding: 16px 14px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <header>
+        <div class="hero-inner">
+          <div>
+            <div class="hero-kicker">
+              <span class="tag">Rollout Plan</span>
+              <span>TCE Conversations – Internal Launch</span>
+            </div>
+            <h1>TCE Conversations Feature Rollout</h1>
+            <p class="hero-sub">
+              Tight, predictable launch sequencing to reduce confusion, protect the
+              pipeline, and close the gap between product updates and compliance outcomes.
+            </p>
+            <div class="hero-metrics">
+              <div class="metric-card">
+                <div class="metric-label">Primary objective</div>
+                <div class="metric-value">Increase usage</div>
+                <div class="metric-chip">Closer oversight • Fewer misses</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Risk we’re solving</div>
+                <div class="metric-value">Lack of compliance</div>
+                <div class="metric-chip">More clarity for AHJs & service providers</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="hero-panel-header">
+              <div class="hero-panel-title">Launch Signal Monitor</div>
+              <div>Week-of view</div>
+            </div>
+            <div class="hero-led">
+              MON 08  ▸ Team training
+              · TUE 09 ▸ AHJ teaser
+              · THU 11 ▸ AHJ + Service Provider launch icons
+              · FRI 12 ▸ Open Q&A + feedback loop
+            </div>
+            <div class="hero-grid">
+              <div class="hero-pill">
+                <div class="hero-pill-label">Audiences</div>
+                <div class="hero-pill-value">
+                  AHJs · Service Providers · Prospects · Internal teams
+                </div>
+              </div>
+              <div class="hero-pill">
+                <div class="hero-pill-label">Core assets</div>
+                <div class="hero-pill-value">
+                  Email icons · Social posts · Training deck · Newsletter feature
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <nav class="nav-strip">
+          <a class="nav-icon" href="#timeline">
+            <span class="nav-dot"></span> Sequenced rollout
+          </a>
+          <a class="nav-icon" href="#audiences">
+            <span class="nav-dot"></span> Department playbook
+          </a>
+          <a class="nav-icon" href="#assets">
+            <span class="nav-dot"></span> Launch icons
+          </a>
+          <a class="nav-icon" href="#readiness">
+            <span class="nav-dot"></span> Readiness & risk
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        <!-- LEFT COLUMN -->
+        <div>
+          <section id="timeline">
+            <div class="section-label">Sequence</div>
+            <div class="section-title-row">
+              <div class="section-title">Launch Timeline – Week One</div>
+              <div class="section-tag">Tightly grouped to avoid mixed messages</div>
+            </div>
+            <div class="section-body">
+              <p>
+                We anchor internal enablement before any external signal,
+                then phase AHJ and service provider communication with enough
+                space for questions but not enough time for confusion.
+              </p>
+
+              <div class="timeline-grid">
+                <div class="day-card">
+                  <div class="day-label">Monday</div>
+                  <div class="day-title">Team Training – Feature Deep Dive</div>
+                  <div class="day-meta">All departments · 1 day</div>
+                  <div class="pill-row">
+                    <span class="pill">What the feature does</span>
+                    <span class="pill">How to talk about lack of compliance</span>
+                  </div>
+                  <ul class="day-list">
+                    <li>Sales, CSM, Customer Experience, Data, and Product sessions.</li>
+                    <li>Walkthrough of use cases, FAQs, and “what could go wrong.”</li>
+                    <li>Confirm owners for follow-up questions after launch.</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <div class="day-label">Tuesday</div>
+                  <div class="day-title">AHJ Teaser Icon</div>
+                  <div class="day-meta">External · Email only</div>
+                  <div class="pill-row">
+                    <span class="pill">Coming soon</span>
+                    <span class="pill">Stronger oversight</span>
+                  </div>
+                  <ul class="day-list">
+                    <li>Short teaser framing the feature as a tool to fix lack of compliance.</li>
+                    <li>No configuration details yet – just value and timing.</li>
+                    <li>Drives awareness without triggering support tickets.</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <div class="day-label">Thursday</div>
+                  <div class="day-title">Full Launch – AHJ + Service Providers</div>
+                  <div class="day-meta">Email icons · Social post</div>
+                  <div class="pill-row">
+                    <span class="pill">How it works</span>
+                    <span class="pill">What changes for them</span>
+                    <span class="pill">Where to get help</span>
+                  </div>
+                  <ul class="day-list">
+                    <li>AHJ launch icon focused on enforcement clarity and faster follow up.</li>
+                    <li>Service provider launch icon focused on fewer missed conversations.</li>
+                    <li>Coordinated social post aligned with the same story.</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <div class="day-label">Friday</div>
+                  <div class="day-title">Follow-Up + Q&A</div>
+                  <div class="day-meta">Internal + External feedback</div>
+                  <div class="pill-row">
+                    <span class="pill">Inbox monitoring</span>
+                    <span class="pill">Front-line feedback</span>
+                  </div>
+                  <ul class="day-list">
+                    <li>CSMs and Customer Experience share top questions in a central log.</li>
+                    <li>Sales gathers market reactions from prospects and partners.</li>
+                    <li>Decide if a second wave icon or micro-update is needed.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="audiences">
+            <div class="section-label">Internal Alignment</div>
+            <div class="section-title-row">
+              <div class="section-title">Department-Specific Focus</div>
+              <div class="section-tag">Same feature • Different angles</div>
+            </div>
+            <div class="section-body">
+              <p>
+                Everyone sees the same feature, but they each need a different story to tell.
+                Training on Monday is split accordingly.
+              </p>
+
+              <div class="audience-grid">
+                <div class="aud-card">
+                  <div class="aud-role">Sales</div>
+                  <div class="aud-note">
+                    Uses the feature as a proof point that we help cities close enforcement gaps
+                    and create predictable communication between AHJs and service providers.
+                  </div>
+                </div>
+                <div class="aud-card">
+                  <div class="aud-role">Customer Success</div>
+                  <div class="aud-note">
+                    Needs every answer AHJs will ask: configuration, rollout impact, and how
+                    this improves report quality and compliance rates.
+                  </div>
+                </div>
+                <div class="aud-card">
+                  <div class="aud-role">Customer Experience</div>
+                  <div class="aud-note">
+                    Front line for service providers. Messaging focuses on where to click,
+                    what changed on their screen, and why this helps them respond faster.
+                  </div>
+                </div>
+                <div class="aud-card">
+                  <div class="aud-role">Data & Product</div>
+                  <div class="aud-note">
+                    Owns behavior tracking, edge cases, and logging issues that could impact
+                    enforcement or create confusion inside The Compliance Engine.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <section id="assets">
+            <div class="section-label">Launch Icons</div>
+            <div class="section-title-row">
+              <div class="section-title">Channel & Asset Map</div>
+              <div class="section-tag">Single source of truth</div>
+            </div>
+            <div class="section-body">
+              <p>
+                Each icon supports a specific part of the story – from teasing the change to
+                reinforcing it in the quarterly narrative.
+              </p>
+
+              <div class="assets-list">
+                <div class="asset-row">
+                  <div class="asset-main">
+                    <div class="asset-name">AHJ Teaser Email</div>
+                    <div class="asset-desc">
+                      Short, high-level announcement that a new communication layer is coming
+                      to help them catch more non-compliant systems.
+                    </div>
+                  </div>
+                  <span class="asset-tag">Tue · External</span>
+                </div>
+
+                <div class="asset-row">
+                  <div class="asset-main">
+                    <div class="asset-name">AHJ Launch Email</div>
+                    <div class="asset-desc">
+                      Explains how the new feature works, what they will see in The Compliance
+                      Engine, and how it helps reduce manual follow-up.
+                    </div>
+                  </div>
+                  <span class="asset-tag">Thu · External</span>
+                </div>
+
+                <div class="asset-row">
+                  <div class="asset-main">
+                    <div class="asset-name">Service Provider Launch Email</div>
+                    <div class="asset-desc">
+                      Clarifies expectations for response times, where to view messages, and
+                      how this keeps their customers and AHJs aligned.
+                    </div>
+                  </div>
+                  <span class="asset-tag">Thu · External</span>
+                </div>
+
+                <div class="asset-row">
+                  <div class="asset-main">
+                    <div class="asset-name">Social Post</div>
+                    <div class="asset-desc">
+                      Public signal that we are investing in better communication to fix
+                      lack of compliance, not just adding features.
+                    </div>
+                  </div>
+                  <span class="asset-tag">Thu · Public</span>
+                </div>
+
+                <div class="asset-row">
+                  <div class="asset-main">
+                    <div class="asset-name">End-of-Quarter Newsletter Feature</div>
+                    <div class="asset-desc">
+                      Recaps the new functionality with early results, tying it back to
+                      reduced manual work and increased compliance.
+                    </div>
+                  </div>
+                  <span class="asset-tag">Post-launch</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="readiness">
+            <div class="section-label">Readiness</div>
+            <div class="section-title-row">
+              <div class="section-title">Risk Map & Status</div>
+              <div class="section-tag">Updated before leadership review</div>
+            </div>
+            <div class="section-body">
+              <div class="score-grid">
+                <div class="score-card">
+                  <div class="score-label">Internal alignment</div>
+                  <div class="score-value">8 / 10</div>
+                  <div class="score-sub">
+                    Training day locked; FAQs and talk tracks to be refined after first wave.
+                  </div>
+                </div>
+                <div class="score-card">
+                  <div class="score-label">External clarity</div>
+                  <div class="score-value">7 / 10</div>
+                  <div class="score-sub">
+                    Email icons drafted; final pass needed to ensure no conflicting messages
+                    for AHJs vs service providers.
+                  </div>
+                </div>
+              </div>
+
+              <ul class="risk-list">
+                <li class="risk-item">
+                  <div class="risk-label">R1</div>
+                  <div class="risk-text">
+                    <span>Mixed messages to AHJs</span> if different teams describe the feature
+                    in different ways.
+                  </div>
+                </li>
+                <li class="risk-item">
+                  <div class="risk-label">R2</div>
+                  <div class="risk-text">
+                    <span>Service provider confusion</span> if they receive an icon but do not
+                    know where to see conversations in the application.
+                  </div>
+                </li>
+                <li class="risk-item">
+                  <div class="risk-label">R3</div>
+                  <div class="risk-text">
+                    <span>Noise instead of clarity</span> if we over-communicate and create
+                    more support tickets than actual compliance gains.
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="checklist">
+                <li>
+                  <div class="check-icon"></div>
+                  <div>Confirm final copy for AHJ and service provider launch icons.</div>
+                </li>
+                <li>
+                  <div class="check-icon"></div>
+                  <div>Publish internal FAQ for CSMs and Customer Experience.</div>
+                </li>
+                <li>
+                  <div class="check-icon"></div>
+                  <div>Align on tracking plan for adoption and early compliance impact.</div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <div>
+          <span class="strong">Thank you</span> to every customer, fire department,
+          and service provider trusting us to help close compliance gaps.
+        </div>
+        <div>
+          Backed by BRYCER – turning reports into results, and lack of compliance into
+          clear, actionable data.
+        </div>
+      </footer>
     </div>
-
-    <!-- Title -->
-    <h1 style="margin:0 0 8px 0; font-size:26px; color:#03233d;">
-      TCE Conversations Feature Rollout Plan
-    </h1>
-    <p style="margin:0 0 24px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-      Objective: Roll out the new Conversations functionality in a controlled, department-aligned sequence that prepares internal teams first, notifies AHJs early, launches jointly to AHJs and Service Providers, and announces the feature to prospects only after stability is confirmed.
-    </p>
-
-    <!-- Monday Section -->
-    <div style="margin-bottom:24px;">
-      <h2 style="margin:0 0 4px 0; font-size:18px; color:#03233d;">
-        Monday, December 8 - Internal Team Training (One-Day, Department-Specific)
-      </h2>
-      <p style="margin:0 0 12px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        Each department receives a tailored session based on their use case and responsibilities.
-      </p>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">Sales Team</h3>
-      <ul style="margin:0 0 8px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>How to position Conversations in demos and proposals</li>
-        <li>How it supports faster compliance and stronger AHJ - Service Provider connection</li>
-        <li>Incorporating it into competitive talking points</li>
-      </ul>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">Customer Success (CSMs)</h3>
-      <ul style="margin:0 0 8px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Full walkthrough of the feature in TCE</li>
-        <li>Expected AHJ questions and approved responses</li>
-        <li>Sensitive AHJ strategies and escalation guidance</li>
-      </ul>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">Customer Experience / Support</h3>
-      <ul style="margin:0 0 8px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>How Service Providers will use the feature</li>
-        <li>How to answer Service Provider functionality questions</li>
-        <li>Understanding differences between AHJ and Service Provider views</li>
-      </ul>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">Data Quality, Engineering, Product</h3>
-      <ul style="margin:0; padding:0 0 0 18px; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Technical functionality and system behavior</li>
-        <li>Logging, visibility, and record history</li>
-        <li>Monitoring adoption and collecting early feedback</li>
-      </ul>
-    </div>
-
-    <!-- Tuesday Section -->
-    <div style="margin-bottom:24px; border-top:1px solid #e5e7eb; padding-top:16px;">
-      <h2 style="margin:0 0 4px 0; font-size:18px; color:#03233d;">
-        Tuesday, December 9 - AHJ Teaser Email
-      </h2>
-      <p style="margin:0 0 8px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Audience:</strong> All active AHJ users in TCE and AHJ segment in Constant Contact.
-      </p>
-      <p style="margin:0 0 4px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Purpose:</strong>
-      </p>
-      <ul style="margin:0 0 8px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Prepare AHJs that a communication enhancement is coming</li>
-        <li>Reduce surprise and prevent escalations</li>
-        <li>Reinforce that this strengthens community safety</li>
-      </ul>
-      <p style="margin:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Message:</strong> No workflow changes; simply an improvement to help resolve issues faster.
-      </p>
-    </div>
-
-    <!-- Thursday Section -->
-    <div style="margin-bottom:24px; border-top:1px solid #e5e7eb; padding-top:16px;">
-      <h2 style="margin:0 0 4px 0; font-size:18px; color:#03233d;">
-        Thursday, December 11 - Launch Day (Joint Announcement)
-      </h2>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">AHJ Launch Email</h3>
-      <ul style="margin:0 0 8px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Announces Conversations as live</li>
-        <li>Shows where to start conversations and where to find messages</li>
-        <li>Reinforces how this supports faster compliance and safer communities</li>
-      </ul>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">Service Provider Launch Email</h3>
-      <ul style="margin:0 0 8px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6%;">
-        <li>Simple, supportive announcement</li>
-        <li>Emphasizes clearer communication with AHJs</li>
-        <li>Highlights reduced delays and improved follow-up</li>
-      </ul>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">In-TCE "What’s New" Message on Message Board</h3>
-      <ul style="margin:0 0 8px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Brief on-login notification</li>
-        <li>Reinforces purpose and location of new feature</li>
-      </ul>
-
-      <h3 style="margin:12px 0 4px 0; font-size:15px; color:#03233d;">Social Media Announcement</h3>
-      <ul style="margin:0; padding:0 0 0 18px; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Public visibility</li>
-        <li>Positions BRYCER as driving innovation in fire and life-safety compliance</li>
-        <li>Reinforces safety messaging</li>
-      </ul>
-    </div>
-
-    <!-- Friday Section -->
-    <div style="margin-bottom:24px; border-top:1px solid #e5e7eb; padding-top:16px;">
-      <h2 style="margin:0 0 4px 0; font-size:18px; color:#03233d;">
-        Friday, December 12 - Follow-Up and Stabilization
-      </h2>
-      <p style="margin:0 0 6px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Audience:</strong> Internal CSM, Support, Data Quality, Engineering.
-      </p>
-      <p style="margin:0 0 4px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Purpose:</strong>
-      </p>
-      <ul style="margin:0 0 0 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Address early AHJ and Service Provider questions</li>
-        <li>Document feedback</li>
-        <li>Confirm functionality is operating as expected</li>
-        <li>Identify any jurisdictions needing direct follow-up</li>
-      </ul>
-    </div>
-
-    <!-- End of Quarter Section -->
-    <div style="margin-bottom:24px; border-top:1px solid #e5e7eb; padding-top:16px;">
-      <h2 style="margin:0 0 4px 0; font-size:18px; color:#03233d;">
-        End of Quarter - Prospect Newsletter Announcement
-      </h2>
-      <p style="margin:0 0 6px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Audience:</strong> Prospective AHJs, prospects in pipeline, demo participants, and general marketing list.
-      </p>
-      <p style="margin:0 0 6px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Placement:</strong> "New Features" section of quarterly newsletter.
-      </p>
-      <p style="margin:0 0 4px 0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Purpose:</strong>
-      </p>
-      <ul style="margin:0 0 6px 18px; padding:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Introduce Conversations as part of ongoing platform innovation</li>
-        <li>Reinforce commitment to strengthening compliance and community safety</li>
-        <li>Leverage the feature as a value-add for prospects evaluating TCE</li>
-      </ul>
-      <p style="margin:0; font-size:14px; color:#4b5563; line-height:1.6;">
-        <strong>Notes:</strong> Prospects see it only after stabilized release, ensuring no early questions or instability impact pipeline.
-      </p>
-    </div>
-
-    <!-- Messaging Principles -->
-    <div style="border-top:1px solid #e5e7eb; padding-top:16px;">
-      <h2 style="margin:0 0 6px 0; font-size:18px; color:#03233d;">
-        Messaging Principles
-      </h2>
-      <ul style="margin:0; padding:0 0 0 18px; font-size:14px; color:#4b5563; line-height:1.6;">
-        <li>Focus on community safety and faster issue resolution</li>
-        <li>Keep explanations simple and benefit-driven</li>
-        <li>Avoid implying workflow changes</li>
-        <li>Build confidence and trust</li>
-        <li>Maintain consistency across internal and external communications</li>
-      </ul>
-    </div>
-
   </div>
-
-  <div style="max-width:900px; margin:16px auto 0 auto; font-size:11px; color:#9ca3af; text-align:right;">
-    Thank you for helping close the gap on lack of compliance.
-  </div>
-</div>
+</body>
+</html>
