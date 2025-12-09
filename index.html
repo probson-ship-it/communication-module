@@ -2,729 +2,537 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rollout</title>
+  <title>CSM FAQ - BRYCER Communications Module</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Montserrat font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --brycer-blue: #03233d;
+      --brycer-navy: #03233d;
       --brycer-orange: #e17f49;
-      --bg-page: #f5f7fa;
-      --bg-card: #ffffff;
-      --border-soft: #dde3ec;
-      --text-main: #1f2933;
-      --text-muted: #6b7280;
-      --radius-lg: 16px;
-      --radius-xl: 22px;
-      --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --brycer-light: #f5f7fb;
+      --brycer-border: #dde3ee;
+      --brycer-text: #1b2430;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
-      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: var(--bg-page);
-      color: var(--text-main);
+      margin: 0;
+      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--brycer-text);
+      background: #ffffff;
+    }
+
+    .page-shell {
       min-height: 100vh;
-      padding: 32px 16px 48px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 1120px;
-    }
-
-    .shell {
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-soft);
-      background: var(--bg-card);
-      padding: 24px 24px 32px;
-    }
-
-    header {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      border-radius: var(--radius-lg);
-      padding: 20px 20px 22px;
-      background: #f9fafb;
-      border: 1px solid var(--border-soft);
     }
 
-    .hero-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 24px;
-      align-items: center;
+    /* Top banner */
+    header {
+      background: var(--brycer-navy);
+      color: #ffffff;
+      padding: 32px 24px;
     }
 
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: #ffffff;
-      border: 1px solid var(--border-soft);
-      font-size: 10px;
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tagline-row {
+      font-size: 12px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-    }
-
-    .hero-kicker span.tag {
-      padding: 2px 9px;
-      border-radius: 999px;
-      background: rgba(225, 127, 73, 0.06);
-      color: var(--brycer-orange);
-      font-weight: 600;
+      color: #d1d9e8;
     }
 
     h1 {
-      font-size: clamp(26px, 3vw, 32px);
-      line-height: 1.1;
-      margin-top: 10px;
-      color: var(--brycer-blue);
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
     }
 
-    .hero-sub {
-      margin-top: 12px;
-      color: var(--text-muted);
+    .header-subtitle {
+      max-width: 640px;
       font-size: 14px;
-      max-width: 520px;
-    }
-
-    .hero-metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .metric-card {
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: #ffffff;
-      border: 1px solid var(--border-soft);
-      min-width: 160px;
-    }
-
-    .metric-label {
-      font-size: 10px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--brycer-blue);
-    }
-
-    .metric-chip {
-      margin-top: 4px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #f3faf7;
-      color: #15803d;
-      font-size: 11px;
-      border: 1px solid #bbf7d0;
-    }
-
-    .hero-panel {
-      justify-self: stretch;
-      border-radius: 14px;
-      background: #ffffff;
-      border: 1px solid var(--border-soft);
-      padding: 14px 14px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .hero-panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .hero-panel-title {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--brycer-blue);
-    }
-
-    .hero-led {
-      font-size: 11px;
       line-height: 1.6;
-      color: var(--text-muted);
-      padding: 8px 10px;
-      border-radius: 10px;
-      background: #f9fafb;
-      border: 1px dashed var(--border-soft);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .hero-pill {
-      border-radius: 10px;
-      background: #f9fafb;
-      border: 1px solid var(--border-soft);
-      padding: 8px 10px;
-      font-size: 11px;
-    }
-
-    .hero-pill-label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-
-    .hero-pill-value {
-      font-weight: 500;
-      font-size: 11px;
-      color: var(--text-main);
-    }
-
-    main {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr);
-      gap: 20px;
-    }
-
-    section {
-      border-radius: var(--radius-lg);
-      background: #ffffff;
-      border: 1px solid var(--border-soft);
-      padding: 16px 16px 18px;
-    }
-
-    section + section {
-      margin-top: 14px;
-    }
-
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .section-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .section-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--brycer-blue);
-    }
-
-    .section-tag {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #f9fafb;
-      border: 1px solid var(--border-soft);
-      color: var(--text-muted);
-    }
-
-    .section-body {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .timeline-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .day-card {
-      border-radius: 12px;
-      background: #f9fafb;
-      border: 1px solid var(--border-soft);
-      padding: 10px 11px 11px;
-    }
-
-    .day-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-
-    .day-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--brycer-blue);
-    }
-
-    .day-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 4px;
+      color: #dfe6f3;
     }
 
     .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      padding: 2px 8px;
+      background: rgba(255, 255, 255, 0.08);
       font-size: 11px;
-      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .pill span.icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brycer-orange);
+      box-shadow: 0 0 0 4px rgba(225, 127, 73, 0.25);
+    }
+
+    main {
+      flex: 1;
+      padding: 32px 24px 48px;
+      background: linear-gradient(180deg, #ffffff 0%, var(--brycer-light) 100%);
+    }
+
+    .content {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 1.2fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 880px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Intro card */
+    .intro-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid var(--brycer-border);
+      padding: 20px 20px 18px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(3, 35, 61, 0.05);
+    }
+
+    .intro-card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--brycer-navy);
+    }
+
+    .intro-card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .intro-highlight {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(225, 127, 73, 0.06);
+      border: 1px solid rgba(225, 127, 73, 0.25);
+      font-size: 13px;
+    }
+
+    .intro-highlight strong {
+      color: var(--brycer-orange);
+    }
+
+    /* FAQ accordion */
+    .faq-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 12px 0 8px;
+      color: var(--brycer-navy);
+    }
+
+    .faq-group-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #5a6475;
+      margin-bottom: 4px;
+    }
+
+    details {
+      border-radius: 12px;
+      border: 1px solid var(--brycer-border);
+      background: #ffffff;
+      box-shadow: 0 6px 18px rgba(3, 35, 61, 0.04);
+      margin-bottom: 10px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--brycer-navy);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-text {
+      flex: 1;
+      padding-right: 12px;
+    }
+
+    .summary-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid var(--brycer-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #7b8596;
+      background: #f7f9fc;
+    }
+
+    details[open] .summary-icon {
+      background: var(--brycer-orange);
+      border-color: var(--brycer-orange);
+      color: #ffffff;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--brycer-border);
+    }
+
+    .faq-body {
+      padding: 12px 16px 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #2b3440;
       background: #ffffff;
     }
 
-    .day-list {
-      list-style: none;
-      font-size: 12px;
-      color: var(--text-muted);
+    .faq-body p {
+      margin: 0 0 8px;
     }
 
-    .day-list li {
-      padding-left: 12px;
-      position: relative;
-      margin-bottom: 2px;
+    .faq-body ul {
+      margin: 4px 0 8px 18px;
+      padding: 0;
+      font-size: 13px;
     }
 
-    .day-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--brycer-orange);
-      font-size: 12px;
+    .faq-body li {
+      margin-bottom: 4px;
     }
 
-    .assets-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 4px;
-      font-size: 12px;
+    /* Right sidebar */
+    .sidebar-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid var(--brycer-border);
+      padding: 18px 18px 16px;
+      box-shadow: 0 10px 26px rgba(3, 35, 61, 0.06);
+      font-size: 13px;
     }
 
-    .asset-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-      border-radius: 10px;
-      border: 1px solid var(--border-soft);
-      padding: 7px 9px;
-      background: #f9fafb;
+    .sidebar-card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--brycer-navy);
     }
 
-    .asset-main {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .asset-name {
-      font-weight: 500;
-      font-size: 12px;
-      color: var(--brycer-blue);
-    }
-
-    .asset-desc {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .asset-tag {
-      font-size: 10px;
-      padding: 2px 7px;
+    .sidebar-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 3px 9px;
       border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      background: rgba(225, 127, 73, 0.06);
+      background: rgba(225, 127, 73, 0.1);
       color: var(--brycer-orange);
-      border: 1px solid rgba(225, 127, 73, 0.4);
-      white-space: nowrap;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-card ul {
+      margin: 6px 0 0 18px;
+      padding: 0;
+    }
+
+    .sidebar-card li {
+      margin-bottom: 6px;
     }
 
     footer {
-      margin-top: 20px;
+      padding: 16px 24px 24px;
+      border-top: 1px solid var(--brycer-border);
+      background: #ffffff;
       font-size: 11px;
-      color: var(--text-muted);
+      color: #7b8596;
+    }
+
+    footer .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border-soft);
+      gap: 8px;
     }
 
-    footer span.strong {
-      color: var(--brycer-orange);
-      font-weight: 600;
-    }
-
-    @media (max-width: 860px) {
-      .hero-inner {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 520px) {
-      body {
-        padding: 20px 10px 28px;
-      }
-      .shell {
-        padding: 18px 16px 26px;
-      }
-      .timeline-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      header {
-        padding: 16px 14px 18px;
-      }
+    footer strong {
+      color: var(--brycer-navy);
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="shell">
-      <header>
-        <div class="hero-inner">
-          <div>
-            <div class="hero-kicker">
-              <span class="tag">Rollout</span>
-              <span>TCE Conversations</span>
-            </div>
-            <h1>Rollout</h1>
-            <p class="hero-sub">
-              A one-week launch plan that starts with internal training on Monday, December 8,
-              then moves to AHJ and service provider communications – so everyone can get to the
-              root of problems faster and keep their communities safer, all from inside TCE.
-            </p>
-            <div class="hero-metrics">
-              <div class="metric-card">
-                <div class="metric-label">What we’re improving</div>
-                <div class="metric-value">Communication speed</div>
-                <div class="metric-chip">Clearer questions · faster answers</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">Problem we’re supporting</div>
-                <div class="metric-value">Reporting times</div>
-                <div class="metric-chip">Less back-and-forth · more action</div>
-              </div>
-            </div>
+<div class="page-shell">
+
+  <header>
+    <div class="header-inner">
+      <div class="tagline-row">
+        Backed by BRYCER · Turning Reports into Results
+      </div>
+      <div class="pill">
+        <span class="icon"></span>
+        <span>Internal only - CSM enablement</span>
+      </div>
+      <h1>CSM FAQ - Communications Module</h1>
+      <p class="header-subtitle">
+        The Communications Module keeps questions and clarifications inside The Compliance Engine so AHJs and
+        service providers can stay aligned, reduce email noise, and close the gap that often leads to lack of compliance.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="content">
+
+      <!-- Left: Intro + FAQ -->
+      <section>
+        <article class="intro-card">
+          <h2>What is the BRYCER Communications Module?</h2>
+          <p>
+            The Communications Module is an embedded messaging tool inside TCE. It allows AHJs and service providers
+            to exchange clarification questions inside the exact report or workflow where that information belongs.
+          </p>
+          <p>
+            It is not designed as real time chat. Instead, it is a structured and traceable way to cut noise, reduce
+            misrouted emails, and keep every question connected to the specific inspection, deficiency, or property
+            that needs action.
+          </p>
+          <div class="intro-highlight">
+            <strong>Primary purpose:</strong> reduce confusion, close communication gaps and remove barriers that
+            prevent jurisdictions from reaching full fire and life safety compliance.
           </div>
+        </article>
 
-          <aside class="hero-panel">
-            <div class="hero-panel-header">
-              <div class="hero-panel-title">Week-one schedule</div>
-              <div>Internal + external</div>
-            </div>
-            <div class="hero-led">
-              Mon Dec 8 – Internal team training · Tue – AHJ teaser email · Thu – AHJ + service
-              provider launch emails and social post · Fri – Internal follow-up on questions and
-              “turn it off” requests.
-            </div>
-            <div class="hero-grid">
-              <div class="hero-pill">
-                <div class="hero-pill-label">Who we talk to</div>
-                <div class="hero-pill-value">
-                  AHJs · Service providers · Prospects · Internal teams
-                </div>
-              </div>
-              <div class="hero-pill">
-                <div class="hero-pill-label">What we use</div>
-                <div class="hero-pill-value">
-                  Email campaigns · Social post · Team training · Newsletter feature
-                </div>
-              </div>
-            </div>
-          </aside>
+        <div class="faq-group-label">Product behavior</div>
+        <h2 class="faq-section-title">How the feature works</h2>
+
+        <details open>
+          <summary>
+            <span class="summary-text">1. Where will this feature be found?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              The messaging feature appears inside the specific report or workflow where the conversation was started.
+              It will not appear globally across TCE. This keeps every thread tied directly to the work instead of
+              spread across inboxes.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-text">2. How do users find a conversation, and is it an open chat box?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              Users simply return to the same report where the message was created. The full thread appears there.
+            </p>
+            <p>
+              There is no floating chat window and no platform wide inbox. Conversations stay anchored to the specific
+              record that needs attention.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-text">3. Can users attach files or photos?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>No, not at this time.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-text">4. Is there historical message history?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              Yes. From the moment the first message is sent, the full conversation is saved so both sides can revisit
+              previous communication tied to that record.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-text">5. Are there online indicators or read receipts?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              No. The feature does not include online or offline status, typing indicators, or read receipts.
+            </p>
+            <p>
+              This keeps expectations realistic and reinforces that the feature is for organized follow up, not
+              instant chat.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-text">6. Can users export message history?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>No, not at this time.</p>
+          </div>
+        </details>
+
+        <div class="faq-group-label">Visibility and routing</div>
+        <h2 class="faq-section-title">Who can see what</h2>
+
+        <details>
+          <summary>
+            <span class="summary-text">7. Who sees the messages?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>Visibility is based on who starts the conversation:</p>
+            <p><strong>If a service provider starts the message:</strong></p>
+            <ul>
+              <li>Everyone in the AHJ department can see the message.</li>
+              <li>Only the specific service provider user who started it can see the message on the provider side.</li>
+            </ul>
+            <p><strong>If an AHJ starts the message:</strong></p>
+            <ul>
+              <li>Only the AHJ user who sent it sees the message on the AHJ side.</li>
+              <li>Everyone at the service provider company with appropriate access can see the message on their side.</li>
+            </ul>
+            <p>
+              This structure routes communication to the right people without overwhelming entire teams.
+            </p>
+          </div>
+        </details>
+
+        <div class="faq-group-label">Notifications and control</div>
+        <h2 class="faq-section-title">Notifications, muting and hub</h2>
+
+        <details>
+          <summary>
+            <span class="summary-text">8. How do notifications and muting work?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p><strong>Email notifications:</strong></p>
+            <p>
+              Message alerts are included in existing daily or weekly digest emails. Users cannot turn message alerts on
+              or off separately. To stop message alerts, they would need to turn off the digest.
+            </p>
+            <p><strong>Muting or disabling messaging:</strong></p>
+            <p>
+              Messaging can be turned off for individual users or for departments and organizations.
+              When messaging is turned off, users lose both the ability to send new messages and to receive new ones.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-text">9. Will there be a hub where users can view all their messages?</span>
+            <span class="summary-icon">+</span>
+          </summary>
+          <div class="faq-body">
+            <p>
+              Yes. A centralized Conversation Hub will be available so users can see an organized list of the
+              conversations they have started across TCE.
+            </p>
+            <p>
+              The hub is a structured summary view, not a real time inbox. It is designed to help users return to
+              ongoing clarification threads without digging through individual reports or external email.
+            </p>
+          </div>
+        </details>
+
+      </section>
+
+      <!-- Right: quick reference sidebar -->
+      <aside>
+        <div class="sidebar-card">
+          <div class="sidebar-tag">Quick reference</div>
+          <h3>Positioning for customers</h3>
+          <p>
+            When you talk about the Communications Module, connect it back to our core problem statement:
+            many jurisdictions struggle with lack of compliance because communication is scattered, incomplete
+            or out of context.
+          </p>
+          <ul>
+            <li>It keeps questions and answers inside TCE, right where work happens.</li>
+            <li>It reduces email noise and misrouted requests.</li>
+            <li>It helps AHJs and service providers close the gap between reports and action.</li>
+          </ul>
         </div>
-      </header>
 
-      <main>
-        <!-- LEFT COLUMN -->
-        <div>
-          <section id="timeline">
-            <div class="section-label">Sequence</div>
-            <div class="section-title-row">
-              <div class="section-title">Launch timeline – week one</div>
-              <div class="section-tag">Full flow from Mon–Fri</div>
-            </div>
-            <div class="section-body">
-              <p>
-                We start with our own teams on Monday, then move to AHJs and service providers for the rest of the week.
-              </p>
+        <div style="height: 16px;"></div>
 
-              <div class="timeline-grid">
-                <div class="day-card">
-                  <div class="day-label">Monday · Dec 8</div>
-                  <div class="day-title">Internal team training</div>
-                  <div class="day-meta">Sales · CSM · Customer Experience · Data · Product</div>
-                  <div class="pill-row">
-                    <span class="pill">How messaging works</span>
-                    <span class="pill">What customers will see</span>
-                  </div>
-                  <ul class="day-list">
-                    <li>Walkthrough of the new messaging experience inside TCE.</li>
-                    <li>Each department reviews how this shows up in their world and talks through
-                        use cases in training.</li>
-                    <li>Set clear guidance: if questions come in after launch, steer people back
-                        into TCE rather than new side processes.</li>
-                  </ul>
-                </div>
-
-                <div class="day-card">
-                  <div class="day-label">Tuesday</div>
-                  <div class="day-title">AHJ teaser email</div>
-                  <div class="day-meta">External – AHJ segment</div>
-                  <div class="pill-row">
-                    <span class="pill">Short and energetic</span>
-                    <span class="pill">Sets expectation</span>
-                  </div>
-                  <ul class="day-list">
-                    <li>“Something new is coming inside TCE – a simple way to connect directly
-                        with service providers when you need clarity.”</li>
-                    <li>Positions this as a modern, expected capability that we’re now bringing
-                        into TCE, alongside what they already rely on us for.</li>
-                    <li>Holds back detail for Thursday to keep attention and interest.</li>
-                  </ul>
-                </div>
-
-                <div class="day-card">
-                  <div class="day-label">Thursday</div>
-                  <div class="day-title">AHJ launch email</div>
-                  <div class="day-meta">External – AHJ segment</div>
-                  <div class="pill-row">
-                    <span class="pill">How it works in TCE</span>
-                    <span class="pill">Why it helps</span>
-                    <span class="pill">Optional alerts</span>
-                  </div>
-                  <ul class="day-list">
-                    <li>Explains that AHJs can now message service providers directly inside TCE
-                        to clear up questions and move work forward faster.</li>
-                    <li>Frames it as a quick way to get to the root of an issue and support
-                        safer outcomes – not as extra work.</li>
-                    <li>Mentions that AHJs can subscribe to email notifications if they want an
-                        alert when someone messages them in TCE, so they don’t have to keep
-                        checking manually.</li>
-                  </ul>
-                </div>
-
-                <div class="day-card">
-                  <div class="day-label">Thursday</div>
-                  <div class="day-title">Service provider launch email</div>
-                  <div class="day-meta">External – SP segment</div>
-                  <div class="pill-row">
-                    <span class="pill">Where to go</span>
-                    <span class="pill">Who they reach</span>
-                    <span class="pill">Optional alerts</span>
-                  </div>
-                  <ul class="day-list">
-                    <li>“If you have questions or aren’t sure what to do next, you can now go
-                        straight into TCE and message your AHJ there.”</li>
-                    <li>Emphasizes that conversations live alongside their reports and history,
-                        so there’s less confusion and fewer misrouted emails.</li>
-                    <li>Mentions that they can turn on email notifications to know when an AHJ
-                        has messaged them, instead of guessing or waiting.</li>
-                  </ul>
-                </div>
-
-                <div class="day-card">
-                  <div class="day-label">Thursday</div>
-                  <div class="day-title">Social post</div>
-                  <div class="day-meta">External – public</div>
-                  <div class="pill-row">
-                    <span class="pill">High-level</span>
-                    <span class="pill">Safety-focused</span>
-                  </div>
-                  <ul class="day-list">
-                    <li>Announces that BRYCER is rolling out built-in messaging between AHJs and
-                        service providers inside The Compliance Engine.</li>
-                    <li>Keeps the focus on clearer, faster conversations around life safety work.</li>
-                  </ul>
-                </div>
-
-                <div class="day-card">
-                  <div class="day-label">Friday</div>
-                  <div class="day-title">Internal follow-up & questions</div>
-                  <div class="day-meta">Internal – all teams</div>
-                  <div class="pill-row">
-                    <span class="pill">Normalize questions</span>
-                    <span class="pill">Reinforce direction</span>
-                  </div>
-                  <ul class="day-list">
-                    <li>Internal note that questions and some “can you turn this off?” feedback
-                        are normal with any change that touches communication.</li>
-                    <li>Guidance is to keep conversations inside TCE and remind customers that
-                        this is about getting answers faster, not making things harder.</li>
-                    <li>Teams share patterns in questions to inform tweaks and help content
-                        going forward.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
+        <div class="sidebar-card">
+          <h3>When in doubt, emphasize:</h3>
+          <ul>
+            <li>Structured messaging, not chat.</li>
+            <li>Context: communication tied to a specific record.</li>
+            <li>Fewer barriers for jurisdictions trying to reach full compliance.</li>
+            <li>Control: AHJs still maintain authority and oversight.</li>
+          </ul>
         </div>
+      </aside>
 
-        <!-- RIGHT COLUMN -->
-        <div>
-          <section id="assets">
-            <div class="section-label">Campaigns</div>
-            <div class="section-title-row">
-              <div class="section-title">Email & messaging map</div>
-              <div class="section-tag">Who gets what · and when</div>
-            </div>
-            <div class="section-body">
-              <p>
-                Each touch has a job. Together, they reinforce that messaging lives in TCE,
-                keeps conversations closer to the data, and helps AHJs and service providers
-                move faster when something needs attention.
-              </p>
+    </div>
+  </main>
 
-              <div class="assets-list">
-                <div class="asset-row">
-                  <div class="asset-main">
-                    <div class="asset-name">Internal training notice</div>
-                    <div class="asset-desc">
-                      Sent ahead of the Monday session so teams know what’s coming, when
-                      to join, and what the training will (and won’t) cover.
-                    </div>
-                  </div>
-                  <span class="asset-tag">Mon – internal</span>
-                </div>
+  <footer>
+    <div class="footer-inner">
+      <span><strong>Internal use only.</strong> Do not share this URL outside BRYCER.</span>
+      <span>Questions or feedback: contact Product or Marketing.</span>
+    </div>
+  </footer>
 
-                <div class="asset-row">
-                  <div class="asset-main">
-                    <div class="asset-name">AHJ teaser email</div>
-                    <div class="asset-desc">
-                      Short note that direct messaging is coming to TCE. Modern, confident tone
-                      focused on clearer, faster conversations with service providers.
-                    </div>
-                  </div>
-                  <span class="asset-tag">Tue – AHJ</span>
-                </div>
+</div>
+</body>
+</html>
 
-                <div class="asset-row">
-                  <div class="asset-main">
-                    <div class="asset-name">AHJ launch email</div>
-                    <div class="asset-desc">
-                      Explains where messaging lives in TCE, how it can be used to quickly
-                      clarify work with service providers, and how to turn on email alerts
-                      when new messages arrive if they want that extra signal.
-                    </div>
-                  </div>
-                  <span class="asset-tag">Thu – AHJ</span>
-                </div>
-
-                <div class="asset-row">
-                  <div class="asset-main">
-                    <div class="asset-name">Service provider launch email</div>
-                    <div class="asset-desc">
-                      Shows service providers where in TCE to go when they have questions,
-                      and lets them know they can subscribe to email notifications so they
-                      don’t miss when an AHJ reaches out.
-                    </div>
-                  </div>
-                  <span class="asset-tag">Thu – SP</span>
-                </div>
-
-                <div class="asset-row">
-                  <div class="asset-main">
-                    <div class="asset-name">Social post</div>
-                    <div class="asset-desc">
-                      Public announcement that BRYCER has added in-platform messaging between
-                      AHJs and service providers in The Compliance Engine, focused on safety,
-                      clarity, and modern communication.
-                    </div>
-                  </div>
-                  <span class="asset-tag">Thu – public</span>
-                </div>
-
-                <div class="asset-row">
-                  <div class="asset-main">
-                    <div class="asset-name">Internal follow-up note</div>
-                    <div class="asset-desc">
-                      Recap for internal teams on what questions came in, how we’re answering
-                      them, and a reminder to keep directing customers back into TCE as the
-                      home for these conversations.
-                    </div>
-                  </div>
-                  <span class="asset-tag">Fri – internal</span>
-                </div>
-
-                <div class="asset-row">
-                  <div class="asset-main">
-                    <div class="asset-name">End-of-quarter newsletter feature</div>
-                    <div class="asset-desc">
-                      Later in the quarter, we highlight how the communication module has
-                      helped AHJs and service providers resolve issues faster and keep
-                      properties on track – turning reports into results.
-                    </div>
-                  </div>
-                  <span class="asset-tag">Post-launch</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
-
-      <footer>
-        <div>
-          <span class="strong">BRYCER</span>
-        </div>
-        <div>
-          Backed by BRYCER – turning reports into results.
-        </div>
       </footer>
     </div>
   </div>
